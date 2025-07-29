@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MooneyMaker Landing</title>
+    <link rel="stylesheet" href="styles2.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    
+    <header class="header-landing">
+        <div class="wrap-logo">
+            <img src="img/logoMaker.png" alt="MooneyMaker Logo" class="logo-header">
+        </div>
+    </header>
+    
+    <!-- 1º Section -->
+
+    <section class="hero-section">
+        <div class="wrap-hero-section">
+            <h1>¿Quienes somos?</h1>
+            <p>Somos el casino más confiable, con pagos rápidos y sin vueltas. Acá ganás más seguido y cobrás al instante. Simple, seguro y hecho para vos.</p>
+            <p class="hero-subtitle">¡Más de 10.000 usuarios felices y pagos instantáneos!</p>
+            <div class="hero-rating">
+            <span>⭐⭐⭐⭐⭐</span>
+            <span class="hero-rating-text">Valoración 5/5</span>
+            </div>
+            <div class="wrap-cta">
+                <a href="https://mooneymaker.co/home?ref=19119" class="cta-a" >JUGAR</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 2º Section -->
+
+    <div class="wrap-title-section">
+        <h2>Categorias de servicios</h2>
+    </div>
+
+    <div class="wrap-servicios-section">
+
+        <div class="item-servicios-section">
+            <img src="img/JokersJewels_1.png" alt="Casino virtual" class="img-servicios">
+            <a href="https://mooneymaker.co/casino" class="name_game" >Casino</a>
+            <button type="button" class="btn-ver-mas" onclick="toggleDescripcion(event, this)">Ver más</button>
+            <div class="descripcion-servicio">
+                Te invitamos a disfrutar de nuestras tragamonedas y juegos originales, donde ganás y retirás en el acto.
+
+            </div>
+        </div>
+
+        <div class="item-servicios-section">
+            <img src="img/imagen-deportivas.jpg" alt="Apuestas deportivas" class="img-servicios">
+            <a href="https://mooneymaker.co/casino" class="name_game" >Apuestas Deportivas</a>
+            <button type="button" class="btn-ver-mas" onclick="toggleDescripcion(event, this)">Ver más</button>
+            <div class="descripcion-servicio">
+                Nuestra casa de apuestas, intuitiva y fácil de usar, está pensada tanto para jugadores nuevos como para los más experimentados.
+
+            </div>
+        </div>
+
+        <div class="item-servicios-section">
+            <img src="img/ruletaVIVO.png" alt="Ruletas en VIVO" class="img-servicios">
+            <a href="https://mooneymaker.co/live-casino" class="name_game" >Live Casino</a>
+            <button type="button" class="btn-ver-mas" onclick="toggleDescripcion(event, this)">Ver más</button>
+            <div class="descripcion-servicio">
+                Junto a expertos en el juego, te esperan las mejores ruletas en vivo para que disfrutes al máximo la experiencia.
+
+            </div>
+        </div>
+        
+        <div class="item-servicios-section">
+            <img src="img/tutorial.jpg" alt="Tutorial de como registrarte" class="img-servicios">
+            <p class="name_game">No sabes como registrarte?</p>
+            <button type="button" class="btn-ver-mas" onclick="toggleDescripcion(event, this)">Ver más</button>
+            <div class="descripcion-servicio">
+                <video controls style="width:100%; border-radius:0.5rem; box-shadow:0 2px 12px #0003;">
+                    <source src="videos/como-crear-un-usuario.mp4" type="video/mp4">
+                    Tu navegador no soporta la reproducción de video.
+                </video>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- 3º Section -->
+
+    <section class="section two-column-section form">
+
+        <div class="wrap-title-section">
+            <h2>Formulario de Contacto</h2>
+        </div>
+
+        <div class="wrap-two-column">
+
+            <div class="wrap-form_two-column">
+                <div class="wrap-text-column">
+                    <h3>Contacta con nosotros</h3>
+
+                    <form action="procesar_formulario.php" method="post" class="form">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" name="nombre" id="nombre" required="">
+                        <br><br>
+
+                        <label for="apellido">Apellido:</label>
+                        <input type="text" name="apellido" id="apellido" required="">
+                        <br><br>
+
+                        <label for="email">Correo electrónico:</label>
+                        <input type="email" name="email" id="email" required="">
+                        <br><br>
+
+                        <label for="telefono">Número de teléfono:</label>
+                        <input type="tel" name="telefono" id="telefono" required="">
+                        <br><br>
+
+                        <input type="submit" value="Enviar" class="cta-a">
+                    </form>
+
+                </div>
+            </div>
+
+            <div class="wrap-img_two-column">
+                <img 
+            src="img/bearMooney.png" 
+            alt="Bear Mooney" 
+            class="bear-img-interactive"
+            style="max-width:70%; border-radius:1rem; transition: transform 0.3s, box-shadow 0.3s; cursor: pointer;"
+            onclick="this.style.transform = this.style.transform === 'scale(1.15) rotate(-5deg)' ? '' : 'scale(1.15) rotate(-5deg)';"
+            onmouseover="this.style.transform='scale(1.08) rotate(-3deg)'; this.style.boxShadow='0 8px 32px 0 #ffe06677';"
+            onmouseout="this.style.transform=''; this.style.boxShadow='';">
+            </div>        
+        </div>
+    </section>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
