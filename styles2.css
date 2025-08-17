@@ -1,26 +1,27 @@
-:root{
---main-c:#fdd72d;
---border-r:.2rem;
-}
+/** -------------------------------ESTILOS GENERALES-------------------------------------- **/
 
-/** Estilos Generales **/
-
-html *{
+*, *::before, *::after {
 margin: 0; 
 padding: 0;
 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+html {
+  font-size: 15px; /* Base para unidades REM. 1rem = 15px. Reduce el tamaño general. */
+  scroll-behavior: smooth; /* Desplazamiento suave al hacer clic en anclas */
+}
+
 body {
   min-height: 100vh;
-  background: linear-gradient(135deg, #23233a 0%, #2d2e42 60%, #44455a 100%);
+  background-color: #333446;
   /* Degradado más oscuro y armonioso con los colores de la web */
   color: #fff;
-  font-size: 16px;
   line-height: 1.5;
+  justify-content: center;
 }
 
 p{
+padding: 0;
 font-size: 1.1rem;
 }
 
@@ -36,18 +37,11 @@ list-style: none;
 padding: 1.5rem 0;
 }
 
-.cta-a{
-color: #fff;
-font-weight: bold;
-font-size: 1.2rem;
-background-color: var(--main-c);
-padding: .5rem 1rem;
-border-radius: var(--border-r);
-}
-
 h1{
 font-size: 2.8rem;
+
 }
+
 h2{
 font-size: 2.5rem;
 color: #c0bebe;
@@ -56,29 +50,31 @@ h3{
 font-size: 2.2rem;
 }
 
-.name_game{
-color: #c0bebe;}
-/** Header **/
+/** -------------------------------HEADER-------------------------------------- **/
 
 .header-landing {
 display: flex;
 align-items: center;
 justify-content: space-between;
-background-color: transparent;
-padding: 0.5rem 2rem;
-height: 4rem;
+align-items: center;
+padding: 0.5rem 2rem; /* Aumentar el padding vertical si es necesario al envolver */
+min-height: 4rem; /* Cambiado de height a min-height para permitir que crezca */
 box-shadow: 0 2px 8px 0 #0002;
+position: sticky; /* Fija el header al hacer scroll */
+top: 0;
+background: #23233aee; /* Fondo con transparencia para ver el contenido detrás */
+backdrop-filter: blur(5px); /* Efecto de desenfoque en el fondo */
+z-index: 100; /* Asegura que esté por encima de otros elementos */
+border-bottom: 1px solid rgba(255, 224, 102, 0.2); /* Borde sutil para definir el header */
+flex-grow:unset;
+flex-direction: row;
+flex-wrap: wrap;
+min-height: 0.6rem; 
 }
 
-.wrap-logo {
-display: flex;
-align-items: center;
-justify-content: center; /* Centra el logo dentro del contenedor */
-width: 100%;
-}
 
 .logo-header {
-max-width: 110px;      /* Más chico */
+max-width: 5rem;      /* Más chico */
 width: 100%;
 height: auto;
 transition: 
@@ -88,8 +84,11 @@ filter 0.3s;
 box-shadow: 0 2px 8px 0 #0006; /* Sombra gris suave */
 filter: none;                  /* Sin brillo */
 border-radius: 1rem;
-background: #181827;
+background: #181827; /* Color específico, podría ser una variable si se reutiliza */
 padding: 0.3rem 0.7rem;        /* Más chico */
+box-sizing: border-box; /* Asegura que el padding no afecte el tamaño total */
+display: inline-block; /* Asegura que el logo sea un bloque */
+align-self: start;
 }
 
 .logo-header:hover {
@@ -98,16 +97,118 @@ box-shadow: 0 4px 16px 0 #0008; /* Sombra gris más notoria al pasar el mouse */
 filter: none;
 background: #333446;
 }
-/** Hero Section **/
+
+.main-nav {
+  width: 80%;
+  display: flex;
+  justify-content: space-evenly; /* Distribuye los elementos uniformemente */
+  flex-grow: 1; /* Permite que el nav ocupe el espacio disponible */
+}
+
+.nav__ul  {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap; /* Permite que los elementos bajen a la siguiente línea */
+  gap: 1rem; /* Espacio entre elementos del menú */
+  margin: 0;
+}
+
+.nav__item {
+  list-style: none;
+  border-radius: 2rem; /* Coincide con el radio del link para un look cohesivo */
+  transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+  /* Hacemos que el contenedor del item reaccione al hover */
+}
+
+/* Aplicamos el efecto hover a todos los items EXCEPTO al que contiene el botón de login */
+.nav__item:not(:has(.link--login)):hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.nav__link {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  color: #f3f3f3;
+  position: relative; /* Necesario para el pseudo-elemento de la animación */
+  font-weight: 500;
+  border-radius: 2rem;
+  transition: all 0.25s ease-in-out;
+  font-size: 1rem;
+  text-decoration: none;
+  overflow: hidden; /* Asegura que la animación no se salga del borde redondeado */
+}
+
+/* Animación de subrayado para los links */
+.nav__link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #ffe066;
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease-out;
+}
+
+.nav__link:hover {
+  background-color: #333446;
+  color: #ffe066;
+}
+
+.nav__link:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Estilo especial para el botón de Login */
+.link--login {
+  background: linear-gradient(90deg, #ffe066 60%, #fdd72d 100%);
+  color: #23233a;
+  font-weight: bold;
+  box-shadow: 0 2px 8px 0 #ffe06644;
+  /* Animación de pulso para llamar la atención */
+  animation: pulse-shadow 2.5s infinite ease-in-out;
+  padding: 0.9rem 2.5rem;
+}
+
+.link--login:hover {
+  background: linear-gradient(90deg, #fdd72d 60%, #ffe066 100%);
+  color: #23233a; /* Mantenemos el color del texto */
+  box-shadow: 0 6px 24px 0 #ffe06688; /* Sombra más pronunciada en hover */
+  transform: translateY(-2px) scale(1.05);
+  animation: none; /* Detenemos la animación de pulso en hover */
+}
+
+/* Keyframes para la animación de pulso del botón de login */
+@keyframes pulse-shadow {
+  0%, 100% {
+    box-shadow: 0 2px 8px 0 #ffe06644;
+  }
+  50% {
+    box-shadow: 0 4px 20px 0 #ffe06677;
+  }
+}
+
+/* Oculta el menú hamburguesa por defecto */
+.hamburger-menu {
+  display: none;
+}
+
+
+/** -------------------------------HERO SECTION-------------------------------------- **/
 
 .hero-section {
-min-height: 90vh;
+min-height: 40vh;
 width: 100%;
 display: flex;
 align-items: center;
 justify-content: flex-start;
-background: 
-linear-gradient(90deg, rgba(35,35,58,0.92) 0%, rgba(92,93,112,0.6) 100%),
+background:
+linear-gradient(90deg, rgba(35, 35, 58, 0.92) 0%, rgba(92, 93, 112, 0.6) 100%),
 url('img/casino-adentro.jpg');
 background-size: cover;
 background-position: center;
@@ -115,6 +216,7 @@ background-repeat: no-repeat;
 background-attachment: fixed;
 box-shadow: 0 8px 32px 0 #0008;
 padding: 2rem 0;
+text-align: center;
 
 }
 
@@ -138,17 +240,17 @@ font-size: 3rem;
 color: #ffe066;
 margin-bottom: 1rem;
 letter-spacing: 2px;
-text-shadow: 1px 2px 12px #23233a88;
+text-shadow: 1px 2px 12px #0005;
 }
 
 .wrap-hero-section p {
 font-size: 1.25rem;
 color: #f3f3f3;
 margin-bottom: 1.5rem;
-line-height: 1.6;
-text-shadow: 0 2px 8px #23233a55;
+  line-height: 1.6;
+  text-shadow: 0 2px 8px #0004;
 }
-
+ 
 .wrap-cta {
 width: 100%;
 display: flex;
@@ -162,7 +264,7 @@ align-items: center;
   font-weight: bold;
   font-size: 1.5rem;           /* Más grande */
   padding: 1.1rem 3.5rem;      /* Más alto y ancho */
-  border-radius: 2.5rem;
+  border-radius: 2.5rem; /* Podría ser una variable si se reutiliza */
   box-shadow: 0 4px 24px 0 #ffe06699, 0 2px 12px 0 #ffe06655;
   transition: 
     background 0.2s,
@@ -180,7 +282,7 @@ align-items: center;
 .cta-a:hover {
 background: linear-gradient(90deg, #fdd72d 60%, #ffe066 100%);
 color: #23233a;
-box-shadow: 0 4px 24px 0 #ffe06699;
+box-shadow: 0 4px 24px 0 #ffe06699; /* Sombra específica para el hover */
 transform: translateY(-3px) scale(1.05);
 }
 
@@ -195,7 +297,7 @@ margin: 2rem auto 1rem auto;
 box-shadow: 0 4px 16px 0 #0003;
 max-width: 700px;
 }
-
+ 
 .wrap-title-section h2 {
 color: #ffe066;
 font-size: 2.2rem;
@@ -208,7 +310,7 @@ margin: 0;
   color: #ffe066;
   font-size: 1.3rem;
   margin-bottom: 1rem;
-  text-shadow: 0 2px 8px #23233a55;
+  text-shadow: 0 2px 8px #0004;
   font-weight: 500;
   letter-spacing: 1px;
 }
@@ -223,7 +325,7 @@ margin: 0;
 .hero-rating span {
   font-size: 1.4rem;
   color: #ffe066;
-  text-shadow: 0 2px 8px #23233a55;
+  text-shadow: 0 2px 8px #0004;
 }
 
 .hero-rating-text {
@@ -245,45 +347,34 @@ margin: 0;
   opacity: 0.85;
   filter: drop-shadow(0 2px 8px #23233a33);
 }
-/** Wrap Title **/
 
-.wrap-title-section{
-display: flex;
-justify-content: center;
-background-color: #5c5d70;
-padding: 1rem;
-}
 
-/** Servicios Section **/
-
+/** -------------------------------SERVICIOS SECTION-------------------------------------- **/
 .servicios-section {
-background-color: #333446;
+  background-color: #333446;
+  padding: 2rem 1rem;
 }
 
 .wrap-servicios-section {
 display: grid;
-grid-template-columns: repeat(4, 1fr); /* Máximo 4 columnas */
+/* Crea columnas que se ajustan automáticamente. Cada columna tendrá un mínimo de 280px y ocupará el espacio sobrante (1fr). */
+grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 gap: 1.5rem;
-justify-items: center;
 margin: 1rem;
+align-items: center;
+
 }
 
-@media (max-width: 1100px) {
-.wrap-servicios-section {
-    grid-template-columns: repeat(2, 1fr); /* 2 columnas en pantallas medianas */
-}
-}
-
-@media (max-width: 600px) {
-.wrap-servicios-section {
-    grid-template-columns: 1fr; /* 1 columna en móviles */
-}
-}
 .item-servicios-section {
+min-height: 180px; /* Limita la altura para mantener un diseño uniforme */
 padding: 1.2rem 1rem 1.5rem 1rem;
-margin: 0.7rem;
 box-sizing: border-box;
-background: linear-gradient(135deg, #23233a 60%, #333446 100%);
+background: 
+  linear-gradient(rgba(18, 18, 31, 0), rgba(18, 18, 31, 0)), /* Overlay para transición */
+  url("img/mesapokeroscura.png") , linear-gradient(180deg, #12121f 100%, #333446 100%);
+background-position: center;
+background-size: cover;
+background-repeat: no-repeat;
 border-radius: 1rem;
 box-shadow: 0 4px 18px 0 #0004;
 transition: 
@@ -293,30 +384,16 @@ background 0.25s;
 display: flex;
 flex-direction: column;
 align-items: center;
-border: 1.5px solid #ffe06633;
+border: 1.5px solid #ffe06633; /* Color específico con opacidad */
 }
 
 .item-servicios-section:hover {
-box-shadow: 0 8px 32px 0 #ffe06655;
-background: linear-gradient(135deg, #333446 40%, #23233a 100%);
+box-shadow: 0 8px 32px 0 #ffe06655; /* Sombra específica con opacidad */
 transform: translateY(-8px) scale(1.03);
 border-color: #ffe06699;
+background-image: url("img/mesapoker.jpeg"), linear-gradient(180deg, #12121f 100%, #050400 100%);
 }
 
-.item-servicios-section img {
-width: 220px;
-height: 160px;
-object-fit: cover;
-border-radius: 0.7rem;
-margin-bottom: 1rem;
-box-shadow: 0 2px 12px 0 #0003;
-background: #23233a;
-transition: box-shadow 0.2s;
-}
-
-.item-servicios-section:hover img {
-box-shadow: 0 4px 24px 0 #ffe06644;
-}
 
 .name_game {
 text-align: center;
@@ -324,45 +401,12 @@ color: #ffe066;
 font-weight: bold;
 font-size: 1.15rem;
 letter-spacing: 1px;
-margin-top: 0.5rem;
+margin: auto;
 text-shadow: 0 2px 8px #23233a88;
 }
 
-.descripcion-servicio {
-  max-height: 0;
-  overflow: hidden;
-  background: #23233a;
-  color: #ffe066;
-  border-radius: 0.7rem;
-  margin-top: 0.7rem;
-  padding: 0 1rem;
-  font-size: 1rem;
-  box-shadow: 0 2px 12px 0 #0003;
-  transition: max-height 0.4s cubic-bezier(.4,2,.6,1), padding 0.3s;
-  position: relative;
-  z-index: 1;
-}
-
-.descripcion-servicio.activa {
-  max-height: 600px; /* Ajusta según el contenido máximo esperado */
-  padding: 1rem;
-}
-.btn-ver-mas {
-  margin-top: 0.5rem;
-  background: linear-gradient(90deg, #ffe066 60%, #fdd72d 100%);
-  color: #23233a;
-  border: none;
-  border-radius: 1rem;
-  padding: 0.4rem 1.2rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.btn-ver-mas:hover {
-  background: linear-gradient(90deg, #fdd72d 60%, #ffe066 100%);
-}
-/** Two Columns Section **/
-
+/** -------------------------------FORMULARIO-------------------------------------- **/
+ 
 section.two-column-section.form {
 background: 
 linear-gradient(120deg, rgba(35,35,58,0.75) 60%, rgba(92,93,112,0.45) 100%),
@@ -371,138 +415,277 @@ background-size: cover;
 background-position: center;
 background-repeat: no-repeat;
 background-attachment: fixed;
-padding: 3rem 0;
+padding: 3rem 1rem;
 display: flex;
 justify-content: center;
 align-items: center;
+margin-bottom: 0;
 }
-.wrap-two-column {
-display: grid;
-grid-template-columns: 1fr 1fr;
-max-width: 1000px;
-width: 100%;
-gap: 2.5rem;
-background: rgba(35,35,58,0.7);
-border-radius: 1.5rem;
-box-shadow: 0 8px 32px 0 #0007;
-overflow: hidden;
-}
-
-.wrap-form_two-column {
-padding: 2.5rem 2rem;
-display: flex;
-justify-content: center;
-align-items: center;
-flex-direction: column;
-background: rgba(44,44,70,0.85);
+.form-container {
+  /* Hacemos el formulario flexible y evitamos el desbordamiento */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 500px; /* Ancho máximo para que no sea demasiado grande en pantallas anchas */
+  width: 90%;       /* Ocupa el 90% del ancho disponible, adaptándose a pantallas chicas */
+  background: rgba(35, 35, 58, 0.6);
+  backdrop-filter: blur(8px);
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px 0 #0007;
+  border: 1px solid #ffe06644;
+  padding: 0;
 }
 
-.wrap-text-column h3 {
-padding: 1.5rem 0 1rem 0;
+.form-content {
+  width: 100%;
+  /* Controlamos el espacio interno del formulario para que el contenido no toque los bordes */
+  padding: 2.5rem;
+  box-sizing: border-box; /* Asegura que el padding no aumente el tamaño total */
+}
+
+.form-content h3 {
 color: #ffe066;
 font-size: 2rem;
 text-align: center;
 letter-spacing: 1px;
 text-shadow: 0 2px 8px #23233a88;
+margin-bottom: 2rem;
+align-items: center;
+justify-content: center;
 }
 
-.wrap-text-column p {
-padding-bottom: 1rem;
-color: #f3f3f3;
-text-align: center;
+.form-group {
+  margin-bottom: 1.5rem;
 }
 
 .form label {
 color: #ffe066;
 font-weight: 500;
-margin-bottom: 0.3rem;
+margin-bottom: 0.5rem;
 display: block;
-letter-spacing: 1px;
+letter-spacing: 0.5px;
+font-size: 0.95rem;
 }
 
 .form input,
 .form textarea {
 width: 100%;
-margin-bottom: 1.2rem;
-padding: 0.7rem 1rem;
+padding: 0.8rem 1rem;
 border-radius: 0.5rem;
 border: 1.5px solid #ffe06655;
 background: #23233a;
 color: #fff;
 font-size: 1rem;
 resize: none;
+box-sizing: border-box;
 box-shadow: 0 2px 8px 0 #0003;
-transition: border 0.2s, box-shadow 0.2s;
+transition: border-color 0.3s, box-shadow 0.3s;
+margin: auto; /* Centra los inputs */
+}
+
+.form input::placeholder {
+  color: #888;
 }
 
 .form input:focus,
 .form textarea:focus {
 outline: none;
-border: 1.5px solid #ffe066;
-box-shadow: 0 4px 16px 0 #ffe06633;
+border-color: #ffe066;
+box-shadow: 0 0 0 3px rgba(253, 215, 45, 0.2);
 }
 
-input[type="submit"] {
-background: linear-gradient(90deg, #ffe066 60%, #fdd72d 100%);
-color: #23233a;
-font-weight: bold;
-font-size: 1.1rem;
-padding: 0.7rem 2.2rem;
-border-radius: 2rem;
-box-shadow: 0 2px 12px 0 #ffe06655;
-cursor: pointer;
-border: none;
-transition: 
-background 0.2s,
-color 0.2s,
-box-shadow 0.2s,
-transform 0.18s;
-}
-
-input[type="submit"]:hover {
-background: linear-gradient(90deg, #fdd72d 60%, #ffe066 100%);
-color: #23233a;
-box-shadow: 0 4px 24px 0 #ffe06699;
-transform: translateY(-3px) scale(1.05);
-}
-
-@media (max-width: 900px) {
-.wrap-two-column {
-grid-template-columns: 1fr;
-gap: 0;
-}
+.form .cta-a {
+  width: 100%;
+  padding: 0.9rem 2rem;
+  font-size: 1.2rem;
+  margin-top: 1rem;
 }
 
 
-/** Footer **/
+/** -------------------------------FOOTER-------------------------------------- **/
 
-.footer-section{
-max-width: 1200px;
-margin: 0 auto;
+.footer-section {
+  background-color: #181827;
+  color: #c0bebe;
+  padding: 3rem 2rem 1.5rem 2rem;
+  margin-top: 0;
+  border-top: 3px solid #ffe066;
 }
 
-.menu-footer-section{
-padding: 1rem 0;
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  /* Crea una cuadrícula responsive donde cada columna tiene un mínimo de 220px */
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
 }
 
-.wrap-social-logos ul, .wrap-menu-footer-section ul{
-display: flex;
-justify-content: center;
+
+.logo-footer {
+  max-width: 150px;
+  margin-bottom: 1rem;
 }
 
-.social-logo{
-max-width: 75px;
-width: 100%;
-padding: 1rem;
+.footer-column h4 {
+  color: #ffe066;
+  font-size: 1.2rem;
+  margin-bottom: 1.2rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
-.wrap-menu-footer-section ul li{
-font-size: 1.1rem;
-padding: 1.5rem;
+.footer-column p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.footer-column ul {
+  padding: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 0.8rem;
+}
+
+.footer-column ul a {
+  color: #c0bebe;
+  transition: color 0.2s, padding-left 0.2s;
+}
+
+.footer-column ul a:hover {
+  color: #fdd72d;
+  padding-left: 5px;
 }
 
 .footer-creds{
-display: flex;
-justify-content: center;
+  text-align: center;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #333446;
+  font-size: 0.9rem;
+  color: #888;
 }
 
+.social-links {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.social-links a img {
+  width: 32px;
+  height: 32px;
+  opacity: 0.8;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.social-links a:hover img {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/** -------------------------------RESPONSIVE DESIGNE-------------------------------------- **/
+
+
+@media (max-width: 768px) {
+
+  /** -----------------GENERALES-------------------- **/
+
+  h2 {
+    font-size: 2rem; /* Tamaño de fuente corregido para ser legible */
+  }
+
+  /** -----------------HEADER-------------------- **/
+
+  .header-landing {
+    
+    flex-direction: row; /* Cambia a columna para pantallas pequeñas */
+    align-items: center;
+    padding: 1rem; /* Aumentar el padding para pantallas pequeñas */
+    position: relative; /* Fija el header al hacer scroll */
+    
+  }
+
+  .main-nav {
+    width: 100%; /* Ocupa todo el ancho disponible */
+    justify-content: center; /* Centra los elementos del menú */
+    flex-wrap: wrap; /* Permite que los elementos bajen a la siguiente línea si es necesario */
+  }
+
+  .logo-header {
+    display: none; /* Oculta el logo en pantallas pequeñas */
+  }
+
+  .nav__link {
+    max-height: 1rem;
+    text-align: center;
+  }
+
+  .link--login {
+  display: inline-flex; /* Para centrar el contenido */
+  justify-content: center; /* Centrado horizontal */
+  align-items: center; /* Centrado vertical */
+  margin-top: 1rem; /* Añadir margen superior para separación */
+  }
+
+
+/** -----------------HERO SECTION-------------------- **/
+.hero-section {
+    padding: 0; /* Aumentar el padding para pantallas pequeñas */
+    text-align: center; /* Centrar el texto en pantallas pequeñas */
+    justify-content: center; /* Centrar el contenido en pantallas pequeñas */
+}
+
+.wrap-hero-section {
+    max-width: 90%; /* Aumentar el ancho máximo para pantallas pequeñas */
+    padding: 1.5rem; /* Reducir el padding para pantallas pequeñas */
+    text-align: center;
+}
+
+.hero-rating {
+    justify-content: center; /* Centrar la calificación en pantallas pequeñas */
+    margin-bottom: 1rem; /* Reducir el margen inferior */
+}
+
+.wrap-cta {
+    justify-content: center; /* Centrar el botón CTA en pantallas pequeñas */
+}
+
+/** -----------------SERVICIOS SECTION-------------------- **/
+
+.wrap-title-section {
+    max-width: 90%; /* Aumentar el ancho máximo para pantallas pequeñas */
+    padding: 0rem; /* Reducir el padding para pantallas pequeñas */
+    text-align: center;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+}
+
+.servicios-section {
+    padding: 0 0; /* Reducir el padding para pantallas pequeñas */
+}
+
+.item-servicios-section {
+    /* Las propiedades flex y max-width ya no son necesarias con Grid, se eliminan para mayor limpieza. */
+    min-height: 10rem; /* Aumentar la altura mínima para pantallas pequeñas */
+}
+/** -----------------FORM SECTION-------------------- **/
+
+.form-content {
+    /* Reducimos el padding en móviles para dar más espacio al contenido */
+    padding: 2rem 1.5rem;
+}
+
+/** -----------------FOOTER-------------------- **/
+
+  .footer-container {
+    /* La propiedad flex-direction no aplica a un contenedor Grid, se elimina. */
+    align-items: center;
+    text-align: center;
+  }
+
+  .social-links {
+    justify-content: center;
+  }
+}
